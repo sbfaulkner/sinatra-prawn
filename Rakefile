@@ -7,8 +7,9 @@ begin
     s.summary = %Q{Sinatra extension to add support for pdf rendering with Prawn templates.}
     s.email = "brentf@unwwwired.net"
     s.homepage = "http://github.com/sbfaulkner/sinatra-prawn"
-    s.description = "TODO"
+    s.description = "Sinatra extension to add support for pdf rendering with Prawn templates."
     s.authors = ["S. Brent Faulkner"]
+    s.add_dependency "prawn"
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
@@ -39,13 +40,6 @@ begin
   end
 rescue LoadError
   puts "RCov is not available. In order to run rcov, you must: sudo gem install spicycode-rcov"
-end
-
-begin
-  require 'cucumber/rake/task'
-  Cucumber::Rake::Task.new(:features)
-rescue LoadError
-  puts "Cucumber is not available. In order to run features, you must: sudo gem install cucumber"
 end
 
 task :default => :test

@@ -1,0 +1,27 @@
+= sinatra-prawn
+
+sinatra-prawn is an extension for sinatra to enable rendering of pdf files
+using prawn templates.
+
+== Example
+
+    require 'rubygems'
+    require 'sinatra'
+    require 'sinatra/prawn'
+
+    set :prawn, { :page_layout => :landscape }
+
+    get '/' do
+      content_type 'application/pdf'
+      prawn :pdf
+    end
+
+    __END__
+
+    @@ pdf
+    pdf.text "Hello world!!!!!"
+
+== Legal
+
+Author:: S. Brent Faulkner <brentf@unwwwired.net>  
+License:: Copyright (c) 2009 unwwwired.net, released under the MIT license
