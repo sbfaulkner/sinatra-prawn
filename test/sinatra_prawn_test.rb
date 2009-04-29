@@ -1,8 +1,6 @@
 require File.dirname(__FILE__) + '/test_helper'
 
 class SinatraPrawnTest < Test::Unit::TestCase
-  include Sinatra::Test
-
   def prawn_app(&block)
     mock_app {
       helpers Sinatra::Prawn
@@ -44,8 +42,10 @@ class SinatraPrawnTest < Test::Unit::TestCase
   def test_raises_error_if_template_not_found
     mock_app {
       helpers Sinatra::Prawn
+      set :environment, :test
+      set :raise_errors, true
       get('/') { prawn :no_such_template }
     }
-    assert_raise(Errno::ENOENT) { get('/') }
+    assert_raises(Errno::ENOENT) { get('/') }
   end
 end
