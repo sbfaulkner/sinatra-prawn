@@ -12,8 +12,8 @@ class SinatraPrawnTest < Test::Unit::TestCase
 
   def test_renders_inline_strings
     prawn_app { prawn 'pdf.text "Hello shrimp!"' }
-    assert ok?
-    text = PDF::TextInspector.analyze(body)
+    assert last_response.ok?
+    text = PDF::TextInspector.analyze(last_response.body)
     assert_equal "Hello shrimp!", text.strings.first
   end
 
@@ -24,8 +24,8 @@ class SinatraPrawnTest < Test::Unit::TestCase
         pdf.text "Hello #{@name}!"
       end
     }
-    assert ok?
-    text = PDF::TextInspector.analyze(body)
+    assert last_response.ok?
+    text = PDF::TextInspector.analyze(last_response.body)
     assert_equal "Hello Frank & Mary!", text.strings.first
   end
 
@@ -34,8 +34,8 @@ class SinatraPrawnTest < Test::Unit::TestCase
       @name = "World"
       prawn :hello
     }
-    assert ok?
-    text = PDF::TextInspector.analyze(body)
+    assert last_response.ok?
+    text = PDF::TextInspector.analyze(last_response.body)
     assert_equal "Hello, World!", text.strings.first
   end
   

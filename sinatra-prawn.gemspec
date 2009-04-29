@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sinatra-prawn}
-  s.version = "0.9.2"
+  s.version = "0.9.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["S. Brent Faulkner"]
-  s.date = %q{2009-04-28}
+  s.date = %q{2009-04-29}
   s.description = %q{Sinatra extension to add support for pdf rendering with Prawn templates.}
   s.email = %q{brentf@unwwwired.net}
   s.extra_rdoc_files = [

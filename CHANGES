@@ -1,3 +1,7 @@
+= 0.9.2.1
+
+* use Rake::Test instead of Sinatra::Test
+
 = 0.9.2 / unreleased
 
 * This version is compatible with the Sinatra 0.9.2 release candidate.

@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'test/unit'
-require 'sinatra/test'
+require 'rack/test'
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'sinatra/prawn'
@@ -52,7 +52,9 @@ module PDF
 end
 
 class Test::Unit::TestCase
-  include Sinatra::Test
+  include Rack::Test::Methods
+
+  attr_reader :app
 
   # Sets up a Sinatra::Base subclass defined with the block
   # given. Used in setup or individual spec methods to establish
