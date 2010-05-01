@@ -1,5 +1,4 @@
 require 'sinatra/base'
-require 'prawn'
 
 module Sinatra
   module Prawn
@@ -13,20 +12,37 @@ module Sinatra
       options[:layout] = false
       render :prawn, template, options, locals
     end
+  end
 
-  protected
-    def render_prawn(template, data, options, locals, &block)
-      filename = options.delete(:filename) || '<PRAWN>'
-      line = options.delete(:line) || 1
-      pdf = ::Prawn::Document.new(options)
+  helpers Prawn
+end
+
+
+module Tilt
+  class PrawnTemplate < Template
+    def initialize_engine
+       return if defined? ::Prawn::Document
+       require_template_library 'prawn'
+       require_template_library 'prawn/layout'
+     end
+
+     def prepare
+     end
+
+    def evaluate(scope, locals, &block)
+      pdf = ::Prawn::Document.new
       if data.respond_to?(:to_str)
-        eval data.to_str, binding, filename, line
+        locals[:pdf] = pdf
+        super(scope, locals, &block)
       elsif data.kind_of?(Proc)
         data.call(pdf)
       end
       pdf.render
     end
-  end
 
-  helpers Prawn
+    def precompiled_template(locals)
+      data.to_str
+    end
+ end
+ register 'prawn', PrawnTemplate
 end
