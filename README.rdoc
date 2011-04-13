@@ -7,6 +7,18 @@ using prawn templates.
 
   sudo gem install sbfaulkner-sinatra-prawn -s http://gems.github.com
 
+== Installation from bundler
+
+add these lines to your project Gemfile 
+
+  source "http://gems.github.com"
+  gem  "sbfaulkner-sinatra-prawn"
+
+and run
+
+  bundle install
+
+
 == Example
 
   require 'rubygems'
