@@ -2,19 +2,25 @@ require 'sinatra/base'
 
 module Sinatra
   module Prawn
-    # Generate pdf file using Prawn.
-    # Takes the name of a template to render as a Symbol and returns a String with the rendered output.
-    #
-    # Options for prawn may be specified in Sinatra using set :prawn, { ... }
-    def prawn(template=nil, options={}, locals = {}, &block)
-      options, template = template, nil if template.is_a?(Hash)
-      template = lambda { block } if template.nil?
-      options[:layout] = false
-      render :prawn, template, options, locals
+    module Helpers
+      # Generate pdf file using Prawn.
+      # Takes the name of a template to render as a Symbol and returns a String with the rendered output.
+      #
+      # Options for prawn may be specified in Sinatra using set :prawn, { ... }
+      def prawn(template=nil, options={}, locals = {}, &block)
+        options, template = template, nil if template.is_a?(Hash)
+        template = lambda { block } if template.nil?
+        options[:layout] = false
+        render :prawn, template, options, locals
+      end
+    end
+
+    def self.registered(app)
+      app.helpers Prawn::Helpers
     end
   end
 
-  helpers Prawn
+  register Prawn
 end
 
 
